@@ -12,7 +12,7 @@
 npm install
 
 # get server up
-node index.js
+npm start
 ```
 
 ## Testing
