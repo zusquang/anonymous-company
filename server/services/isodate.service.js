@@ -1,6 +1,7 @@
 const VARs = require('../constants/var.constant');
 const moment = require('moment');
 const request = require('request');
+const parser = require('xml2json');
 
 ISODateService = function() {};
 
@@ -16,8 +17,12 @@ ISODateService.prototype.getISODate = function(offset, next) {
 
         var timeObj = JSON.parse(parser.toJson(data.body));
         var timeUtc = moment(timeObj.time).utc().utcOffset((offset * 60)).format(VARs.ISO_FORMAT);
+        var result = {
+            dt: timeUtc,
+            tz: (offset > 0) ? VARs.ISO_TZ + '+' + offset : VARs.ISO_TZ + offset
+        }
 
-        next(null, timeUtc);
+        next(null, result);
     });
 }
 
