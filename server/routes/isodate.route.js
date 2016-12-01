@@ -25,6 +25,7 @@ module.exports = function(app) {
 	app.get(APIs.GET_ISO_DATE, function( req, res ) {
 		var offset = parseInt(req.params.offset);
 		isoDateService.getISODate(offset, function(err, data) {
+			console.log(data);
 			if (err) {
 				_responseFailure('Get isodate failure, try again', res);
 			}
